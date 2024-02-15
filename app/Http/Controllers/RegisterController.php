@@ -41,7 +41,7 @@ class RegisterController extends Controller
         ];
 
         User::create($credentials);
-        return view('layout.login');
+        return redirect('/login');
 
     }
 }

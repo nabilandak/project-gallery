@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostinganController;
 
@@ -20,9 +21,7 @@ use App\Http\Controllers\PostinganController;
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/detail-foto', function () {
-    return view('layout/detail-foto');
-});
+Route::get('/detail-foto', [PostinganController::class, 'detailFoto']);
 
 Route::get('/category', function () {
     return view('layout/category');
@@ -51,9 +50,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/edit-profile', function () {
         return view('layout/edit-profile');
     });
-    Route::get('/profile', function () {
-        return view('layout/profile');
-    });
+    Route::get('/profile', [ProfileController::class, 'index']);
     Route::get('/upload-foto', [PostinganController::class, 'form']);
     Route::post('/upload-foto-proses', [PostinganController::class, 'uploadFoto']);
 

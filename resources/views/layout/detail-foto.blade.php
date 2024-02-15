@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="post-details-thumb mb-50">
-                    <img src='img/images/wpap(3).jpg' alt=''>
+                    <img src='{{ asset('img-foto/'.$dataPostingan->foto)}}' alt=''>
                 </div>
 
             </div>
@@ -24,26 +24,21 @@
 
                                 <!-- Post Content -->
                                 <div class="post-content mt-0">
-                                    <a href="#" class="post-cata cata-sm cata-danger">Game</a>
-                                    <a href="single-post.html" class="post-title mb-2">John Lennon in Wpap Pop Art
-                                        Style</a>
+                                    <a href="#" class="post-cata cata-sm cata-danger">{{$dataPostingan->kategori->nama}}</a>
+                                    <a href="single-post.html" class="post-title mb-2">{{$dataPostingan->judul}}</a>
 
                                     <div class="d-flex justify-content-between mb-30">
                                         <div class="post-meta d-flex align-items-center">
-                                            <a href="#" class="post-author">By Muhammad Nabil</a>
+                                            <a href="#" class="post-author">By: {{Auth::user()->name}}</a>
                                             <i class="fa fa-circle" aria-hidden="true"></i>
-                                            <a href="#" class="post-date">Sep 08, 2018</a>
+                                            <a href="#" class="post-date">{{ $dataPostingan->created_at->format('Y-m-d') }}</a>
+
                                         </div>
 
                                     </div>
                                 </div>
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec semper arcu. Donec
-                                    maximus lacinia feugiat. Vestibulum leo odio, congue luctus luctus sit amet, porta
-                                    in nunc. Mauris velit nulla, semper sit amet augue eget, iaculis maximus urna.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec semper arcu. Donec
-                                    maximus lacinia feugiat. Vestibulum leo odio, congue luctus luctus sit amet, porta
-                                    in nunc. Mauris velit nulla, semper sit amet augue eget, iaculis maximus urna.</p>
+                                <p>{{$dataPostingan->deskripsi}}</p>
 
                                 <div class="post-meta d-flex mt-30 mb-30">
                                     <ul>

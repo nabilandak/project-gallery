@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Album;
 use App\Models\Kategori;
+use App\Models\Postingan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostinganController extends Controller
 {
@@ -25,21 +28,27 @@ class PostinganController extends Controller
         $foto_name = date('dmyhis').'.'.$foto_extention;
         $foto_file->move(public_path('img-foto/'),$foto_name);
 
-        $credentials = [
+        $dataPostingan = [
             'judul'=>$request->judul,
             'deskripsi'=>$request->deskripsi,
             'kategori_id'=>$request->kategori_id,
             'album_id'=>$request->album_id,
             'foto'=>$foto_name, // disesuaikan dengan nama file yang diunggah
+            'user_id' => auth()->user()->id,
         ];
 
-        User::create($credentials);
-        return view('layout.login');
+        Postingan::create($dataPostingan);
+        return redirect('/');
 
     }
     public function form(Request $request){
         $dataKategori = Kategori::all();
         $dataAlbum = Album::where('user_id', auth()->user()->id)->get();
         return view('layout.upload-foto', compact('dataKategori', 'dataAlbum'));
+    }
+
+    public function detailFoto(Request $request){
+        $dataPostingan = Postingan::FirstWhere('user_id',Auth::user()->id);
+        return view('layout.detail-foto', compact('dataPostingan'));
     }
 }

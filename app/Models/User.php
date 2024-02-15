@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -59,11 +59,11 @@ class User extends Authenticatable
     }
 
     public function laporankomentar(){
-        return $this->hasMany(LaporanKomentar::class, 'user_id', 'id');
+        return $this->hasMany(Laporan_komentar::class, 'user_id', 'id');
     }
 
     public function laporanpostingan(){
-        return $this->hasMany(LaporanPostingan::class, 'user_id', 'id');
+        return $this->hasMany(Laporan_postingan::class, 'user_id', 'id');
     }
 
     public function like(){

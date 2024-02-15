@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('judul');
             $table->text('deskripsi');
             $table->unsignedBigInteger('album_id')->nullable();
+            $table->string('foto');
             $table->timestamps();
         });
     }

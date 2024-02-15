@@ -15,7 +15,7 @@ class Postingan extends Model
     }
 
     public function laporan(){
-        return $this->hasMany(LaporanPostingan::class, 'postingan_id', 'id');
+        return $this->hasMany(Laporan_postingan::class, 'postingan_id', 'id');
     }
 
     public function komentar(){

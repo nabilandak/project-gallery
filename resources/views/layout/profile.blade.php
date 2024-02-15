@@ -30,14 +30,9 @@
                             <div class="col-lg-4 mb-5">
                                 <div class="card author-widget">
                                     <div class="p-4">
-                                        <img class="author-avatar" src="img/bg-img/30.jpg" alt="">
-                                        <a href="#" class="author-name">Chris Hemsworth</a>
-                                        <div class="author-social-info">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                                        </div>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing</p>
+                                        <img class="author-avatar" src="{{ asset('img-avatar/'.Auth::user()->avatar)}}" alt="">
+                                        <a href="#" class="author-name">{{Auth::user()->name}}</a>
+                                        <p><a href="#" class="author-name">{{ Auth::user()->bio}}</a></p>
                                         <div class="col-12 mb-3">
                                             <a href='' class="btn vizew-btn">Follow</a>
                                         </div>
@@ -58,25 +53,17 @@
                                         <p class="mb-0">Username</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-white mb-0">Johnatan Smith</p>
+                                        <p class="text-white mb-0">{{Auth::user()->name}}</p>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Password</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-white mb-0">example@example.com</p>
-                                    </div>
-                                </div>
+                                
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-white mb-0">(097) 234-5678</p>
+                                        <p class="text-white mb-0">{{Auth::user()->no_telepon}}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -85,7 +72,7 @@
                                         <p class="mb-0">Address</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-white mb-0">West Java - Indonesia</p>
+                                        <p class="text-white mb-0">{{Auth::user()->address}}</p>
                                     </div>
 
                                 </div>
@@ -106,46 +93,22 @@
                                         <div class="row">
 
                                             <!-- Single Blog Post -->
+                                            @foreach($dataAlbum as $d)
                                             <div class="col-12 col-md-3">
                                                 <div class="single-post-area mb-30">
                                                     <!-- Post Thumbnail -->
                                                     <div class="post-thumbnail">
-                                                        <a href=''><img src="img/bg-img/11.jpg" alt=""></a>
+                                                        <a href=''><img src="{{ asset('img-thumbnail/'.$d->thumbnail)}}" alt=""></a>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endforeach
 
-                                            <!-- Single Blog Post -->
-                                            <div class="col-12 col-md-3">
-                                                <div class="single-post-area mb-30">
-                                                    <!-- Post Thumbnail -->
-                                                    <div class="post-thumbnail">
-                                                        <a href=''><img src="img/bg-img/12.jpg" alt=""></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-md-3">
-                                                <div class="single-post-area mb-30">
-                                                    <!-- Post Thumbnail -->
-                                                    <div class="post-thumbnail">
-                                                        <a href=''><img src="img/bg-img/11.jpg" alt=""></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- Single Blog Post -->
-                                            <div class="col-12 col-md-3">
-                                                <div class="single-post-area mb-30">
-                                                    <!-- Post Thumbnail -->
-                                                    <div class="post-thumbnail">
-                                                        <a href=''><img src="img/bg-img/12.jpg" alt=""></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
 
                                             <!-- Centered Button -->
                                             <div class="col-12 mb-3">
-                                                <a href='' class="btn vizew-btn">Add Album</a>
+                                                <a href='/create-album' class="btn vizew-btn">Add Album</a>
                                             </div>
                                         </div>
 
@@ -170,25 +133,12 @@
                                 <div class="line"></div>
                             </div>
                             <!-- Post Thumbnail -->
+                            @foreach($dataPostingan as $d)
                             <div class="container-image">
                                 <a href='/detail-foto'>
-                                    <img src="img/images/wpap(3).jpg" class="image-contents">
+                                <img src="{{ asset('img-foto/'.$d->foto)}}" alt="" class="image-contents">
                                 </a>
-
-                                <img src="img/images/sampul.jpg" class="image-contents">
-                                <img src="img/images/anime.png" class="image-contents">
-                                <img src="img/images/landscape.jpg" class="image-contents">
-                                <img src="img/images/sampul.jpg" class="image-contents">
-                                <img src="img/images/wpap(3).jpg" class="image-contents">
-                                <img src="img/images/sampul.jpg" class="image-contents">
-                                <img src="img/images/anime.png" class="image-contents">
-                                <img src="img/images/landscape.jpg" class="image-contents">
-                                <img src="img/images/sampul.jpg" class="image-contents">
-                                <img src="img/images/wpap(3).jpg" class="image-contents">
-                                <img src="img/images/sampul.jpg" class="image-contents">
-                                <img src="img/images/anime.png" class="image-contents">
-                                <img src="img/images/landscape.jpg" class="image-contents">
-                                <img src="img/images/sampul.jpg" class="image-contents">
+                            @endforeach
                             </div>
                         </div>
                     </div>
