@@ -1,21 +1,6 @@
 @extends('app/master')
-@section('title')
 @section('contents')
-<!-- Preloader -->
-<div class="preloader d-flex align-items-center justify-content-center">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
 
-<!-- ##### Header Area Start ##### -->
-@include('app/header')
-<!-- ##### Header Area End ##### -->
-
-<!-- ##### Breadcrumb Area Start ##### -->
 <div class="vizew-breadcrumb">
     <div class="container">
         <div class="row">
@@ -38,11 +23,11 @@
         <div class="row justify-content-center">
             <div class="col-12 col-lg-12">
                 <!-- Typography Content -->
-                <section style="">
+                <section style="" class="m-2">
                    
                     <div class="container py-5">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 mb-5">
                                 <div class="card author-widget">
                                     <div class="p-4">
                                         <img class="author-avatar" src="img/bg-img/30.jpg" alt="">
@@ -106,7 +91,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-3 mt-3">
-                                        <a href='' class="btn vizew-btn">Edit Profil</a>
+                                        <a href='/edit-profile' class="btn vizew-btn">Edit Profil</a>
                                     </div>
                                 </div>
 
@@ -160,7 +145,7 @@
 
                                             <!-- Centered Button -->
                                             <div class="col-12 mb-3">
-                                                <a href='' class="btn vizew-btn">Manage Album</a>
+                                                <a href='' class="btn vizew-btn">Add Album</a>
                                             </div>
                                         </div>
 
@@ -175,7 +160,7 @@
                 </section>
 
                 <!-- Typography Content -->
-                <div class="typography-content mb-50">
+                <div class="typography-content mb-50 m-4">
                     <div class="row">
                         <!-- Single Blog Post -->
 
@@ -213,13 +198,4 @@
     </div>
 </div>
 <!-- ##### Breadcrumb Area End ##### -->
-
-
-
-
-
-<!-- ##### Footer Area Start ##### -->
-@include('app/footer')
-<!-- ##### Footer Area End ##### -->
-
 @endsection

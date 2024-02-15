@@ -1,21 +1,6 @@
 @extends('app/master')
-@section('title')
 @section('contents')
-<!-- Preloader -->
-<div class="preloader d-flex align-items-center justify-content-center">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
 
-<!-- ##### Header Area Start ##### -->
-@include('app/header')
-<!-- ##### Header Area End ##### -->
-
-<!-- ##### Breadcrumb Area Start ##### -->
 <div class="vizew-breadcrumb">
     <div class="container">
         <div class="row">
@@ -76,7 +61,7 @@
 
                     </div>
                     <div class="col-sm-12 mt-3">
-                        <a href='' class="btn vizew-btn" style="background-color: orange;">Edit</a>
+                        <a href='/edit-foto' class="btn vizew-btn" style="background-color: orange;">Edit</a>
                         <a href='' class="btn vizew-btn mx-3">Delete</a>
                     </div>
                 </div>
@@ -160,8 +145,7 @@
                                     
                                     
                                 <div class="d-flex align-items-center">
-                                    <a href="#" class="like">like</a>
-                                    <a href="#" class="reply">Reply</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -189,8 +173,7 @@
                                 <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
                                     consectetur, adipisci velit, sed quia non numquam eius</p>
                                 <div class="d-flex align-items-center">
-                                    <a href="#" class="like">like</a>
-                                    <a href="#" class="reply">Reply</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -209,12 +192,7 @@
                 <div class="contact-form-area">
                     <form action="#" method="post">
                         <div class="row">
-                            <div class="col-12 col-lg-6">
-                                <input type="text" class="form-control" id="name" placeholder="Your Name*">
-                            </div>
-                            <div class="col-12 col-lg-6">
-                                <input type="email" class="form-control" id="email" placeholder="Your Email*">
-                            </div>
+                            
                             <div class="col-12">
                                 <textarea name="message" class="form-control" id="message"
                                     placeholder="Message*"></textarea>
@@ -235,10 +213,5 @@
 
 
 
-
-
-<!-- ##### Footer Area Start ##### -->
-@include('app/footer')
-<!-- ##### Footer Area End ##### -->
 
 @endsection

@@ -33,7 +33,24 @@
 </head>
 
 <body>
+<div class="preloader d-flex align-items-center justify-content-center">
+    <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ##### Header Area Start ##### -->
+@if(Auth::check())
+    @include('app.header')
+@else
+    @include('app.header-2')
+@endif
+
+<!-- ##### Header Area End ##### -->
 @yield('contents')
+@include('app/footer')
 
  <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
@@ -46,6 +63,16 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    @if(session()->has('error'))
+    Swal.fire({
+        icon: "error",
+        title: "{{session('error')}}",
+        footer: '<a href="/login">Coba login kembali!</a>'
+        });
+    @endif
+    </script>
     
 </body>
 

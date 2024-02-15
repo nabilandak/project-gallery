@@ -2,18 +2,8 @@
 @section('title')
 @section('contents')
 <!-- Preloader -->
-<div class="preloader d-flex align-items-center justify-content-center">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
 
-<!-- ##### Header Area Start ##### -->
-@include('app/header')
-<!-- ##### Header Area End ##### -->
+
 
 <!-- ##### Hero Area Start ##### -->
 <section class="hero--area section-padding-80">
@@ -210,16 +200,16 @@
                 <div class="section-heading">
                     
                     <ul>
-                        <li class="d-inline p-2"><a href=''>ANIME</a></li>
-                        <li class="d-inline p-2"><a href=''>WPAP</a></li>
-                        <li class="d-inline p-2"><a href=''>VECTOR</a></li>
-                        <li class="d-inline p-2"><a href=''>DIGITAL PAINTING</a></li>
-                        <li class="d-inline p-2"><a href=''>RETRO</a></li>
-                        <li class="d-inline p-2"><a href=''>VAPORWAVE</a></li>
-                        <li class="d-inline p-2"><a href=''>PHOTOGRAPHY</a></li>
-                        <li class="d-inline p-2"><a href=''>VECTOR</a></li>
-                        <li class="d-inline p-2"><a href=''>SC-FI</a></li>
-                        <li class="d-inline p-2"><a href=''>POP ART</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>ANIME</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>WPAP</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>VECTOR</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>DIGITAL PAINTING</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>RETRO</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>VAPORWAVE</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>PHOTOGRAPHY</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>VECTOR</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>SC-FI</a></li>
+                        <li class="d-inline p-2"><a href='/category-detail'>POP ART</a></li>
                     </ul>
                     <div class="input-group rounded mt-5 d-flex justify-content-center">
                         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"

@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PostinganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +23,45 @@ Route::get('/', function () {
 Route::get('/detail-foto', function () {
     return view('layout/detail-foto');
 });
-Route::get('/profile', function () {
-    return view('layout/profile');
+
+Route::get('/category', function () {
+    return view('layout/category');
 });
-Route::get('/upload-foto', function () {
-    return view('layout/upload-foto');
+
+Route::get('/category-detail', function () {
+    return view('layout/category-detail');
 });
+
+
+Route::middleware('guest')->group(function(){
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login-proses', [LoginController::class, 'login']);
+    
+    Route::get('/register', [RegisterController::class, 'index']);
+    Route::post('/register-proses', [RegisterController::class, 'register']);
+});
+
+Route::middleware('auth')->group(function(){
+
+    Route::get('/logout', [LoginController::class, 'logout']);
+
+    Route::get('/edit-foto', function () {
+        return view('layout/edit-foto');
+    });
+    Route::get('/edit-profile', function () {
+        return view('layout/edit-profile');
+    });
+    Route::get('/profile', function () {
+        return view('layout/profile');
+    });
+    Route::get('/upload-foto', [PostinganController::class, 'form']);
+    Route::post('/upload-foto-proses', [PostinganController::class, 'uploadFoto']);
+
+    Route::get('/create-album', [AlbumController::class, 'index']);
+    Route::post('/create-album-proses', [AlbumController::class, 'create']);
+    
+});
+
+
+
+

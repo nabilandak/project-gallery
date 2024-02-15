@@ -1,21 +1,6 @@
 @extends('app/master')
-@section('title')
 @section('contents')
-<!-- Preloader -->
-<div class="preloader d-flex align-items-center justify-content-center">
-    <div class="lds-ellipsis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
 
-<!-- ##### Header Area Start ##### -->
-@include('app/header')
-<!-- ##### Header Area End ##### -->
-
-<!-- ##### Hero Area Start ##### -->
 <section class="hero--area section-padding-80">
     <div class="container">
         <div class="row no-gutters">
@@ -230,38 +215,37 @@
 
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 
-                    <!-- Contact Form Area -->
+                   <form>
                     <div class="contact-form-area mt-50">
                         <form action="#" method="post">
                             <div class="form-group">
                                 <label for="judul">Judul</label>
-                                <input type="text" class="form-control text-white" id="judul">
+                                <input type="text" class="form-control text-white" id="judul" name="judul">
                             </div>
                 
                             <div class="form-group">
                                 <label for="Description">Description</label>
-                                <textarea name="Description" class="form-control text-white" id="Description" cols="30" rows="10"></textarea>
+                                <textarea name="Description" class="form-control text-white" id="Description" cols="30" rows="10" name="deskripsi"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="category">Category</label>
-                                <select class ="form-control text-white" name="category">
+                                <select class ="form-control text-white" name="kategori_id">
                                     <option>-- DEFAULT --</option>
-                                    <option>-- WPAP --</option>
-                                    <option>-- VECTOR --</option>
-                                    <option>-- SC-FI --</option>
-                                    <option>-- POP ART --</option>
+                                    @foreach($dataKategori as $d)
+                                    <option value="{{$d->id}}">{{$d->nama}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="album">Album</label>
-                                <select class ="form-control text-white" name="album">
+                                <select class ="form-control text-white" name="album_id">
                                     <option>-- DEFAULT --</option>
                                     <option>-- WPAP --</option>
                                     <option>-- VECTOR --</option>
                                     <option>-- SC-FI --</option>
                                     <option>-- POP ART --</option>
                                 </select>
-                                <span><a href='' style="text-decoration: underline ">Klik disini untuk membuat album! </a></span>
+                                <span><a href='/create-album' style="text-decoration: underline ">Klik disini untuk membuat album! </a></span>
                             </div>
                             <div class="form-group">
                                 <label for="foto">Foto</label>
@@ -271,6 +255,7 @@
                             <button class="btn vizew-btn mt-30" type="submit">Submit</button>
                         </form>
                     </div>
+                    </form>
                 </div>
 
                
@@ -279,5 +264,5 @@
     </section>
 <!-- ##### Vizew Psot Area End ##### -->
 
-@include('app/footer')
+
 @endsection

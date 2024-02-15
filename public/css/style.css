@@ -32,3 +32,24 @@
 .card {
     background-color: rgb(45, 45, 45) !important;
 }
+
+.btn-primary {
+    background-color: rgb(219, 68, 55) !important;
+    border-color: rgb(219, 68, 55) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Transisi untuk latar dan border */
+}
+
+.btn-primary:hover {
+    background-color: rgb(118, 118, 118) !important; /* Warna saat tombol dihover (opsional) */
+    border-color: rgb(118, 118, 118) !important;
+}
+
+.mt-3 .link-hover {
+    color:#999999; /* Set the default text color */
+    text-decoration: none; /* Remove the default underline */
+    transition: color 0.3s; /* Add a smooth transition for the color change */
+  }
+
+  .mt-3 .link-hover:hover {
+    color:#db4437; /* Change the text color on hover */
+  }
