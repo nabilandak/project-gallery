@@ -13,40 +13,39 @@
             </div>
             <div class="col-12 col-md-6 mt-4 mt-md-0">
                 <div class="login-content text-center">
-                    <img src='img/images/digital-painting.jpg' alt='' class="img-fluid">
+                    <img src="{{ asset('img-foto/'.$dataPostingan->foto)}}" alt='' class="img-fluid">
                 </div>
             </div>
             <div class="col-12 col-md-6 mt-4">
                 <div class="login-content">
                     <!-- Section Title -->
 
-                    <form action="index.html" method="post">
+                    <form action="/edit-foto-proses/{{$dataPostingan->id}}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="judul">Judul</label>
-                            <input type="text" class="form-control text-white" id="judul" value="Salvador Dali Digital Painting">
+                            <input type="text" class="form-control text-white" id="judul" value="{{$dataPostingan->judul}}" name="judul">
                         </div>
                         <div class="form-group">
                             <label for="deskription">Deskription</label>
-                            <textarea class="form-control text-white" id="deskription">This is illustration of Salvador Dali with Digital Painting Style Art</textarea>
+                            <textarea class="form-control text-white" id="deskription" name="deskripsi">{{$dataPostingan->deskripsi}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select class="form-control text-white" name="category">
+                            <select class="form-control text-white" name="kategori_id">
                                 <option>-- DEFAULT --</option>
-                                <option>-- WPAP --</option>
-                                <option>-- VECTOR --</option>
-                                <option>-- SC-FI --</option>
-                                <option>-- POP ART --</option>
+                                @foreach($dataKategori as $d)
+                                    <option value="{{$d->id}}" @if($d->id == $dataPostingan->kategori->id) selected @endif>{{$d->nama}}</option>
+                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="album">Album</label>
-                            <select class="form-control text-white" name="album">
+                            <select class="form-control text-white"  name="album_id">
                                 <option>-- DEFAULT --</option>
-                                <option>-- The Bends --</option>
-                                <option>-- DOTM --</option>
-                                <option>-- The Wall --</option>
-                                <option>-- OKNOTOK --</option>
+                                @foreach($dataAlbum as $d)
+                                    <option value="{{$d->id}}" @if($d->id == $dataPostingan->album->id) selected @endif>{{$d->name}}</option>
+                                 @endforeach
                             </select>
                             <span><a href='/create-album' style="text-decoration: underline">Klik disini untuk membuat album! </a></span>
                         </div>

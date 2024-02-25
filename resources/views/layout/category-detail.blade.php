@@ -175,31 +175,13 @@
             <div class="col-12">
                 <!-- Section Heading -->
                 <div class="section-heading">
-                    <h4>Category All </h4>
+                    <h4>{{$kategori->nama}}</h4>
                     <div class="line"></div>
+                    <br>
+                    <p>{{$kategori->deskripsi}}</p>
 
                 </div>
                 <div class="section-heading">
-                    
-                <ul>
-                        <li class="d-inline p-2"><a href='/category-detail'>ANIME</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>WPAP</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>VECTOR</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>DIGITAL PAINTING</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>RETRO</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>VAPORWAVE</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>PHOTOGRAPHY</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>VECTOR</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>SC-FI</a></li>
-                        <li class="d-inline p-2"><a href='/category-detail'>POP ART</a></li>
-                    </ul>
-                    <div class="input-group rounded mt-5 d-flex justify-content-center">
-                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon"  />
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fa fa-search"></i>
-                        </span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -209,113 +191,20 @@
             
                 <div class="single-post-area mb-50">
                     <!-- Post Thumbnail -->
-                    <div class="container-image">
-                        <a href='/detail-foto'>
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
+                    <div class="container-image mb-4">
+                        @foreach($dataDetailKategori as $d)
+                        <a href='/detail-foto/{{$d->id}}'>
+                        <img src="{{asset('/img-foto/'.$d->foto)}}" class="image-contents">
                         </a>
+                        @endforeach
                        
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/wpap(3).jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-                        <img src="img/images/anime.png" class="image-contents">
-                        <img src="img/images/landscape.jpg" class="image-contents">
-                        <img src="img/images/sampul.jpg" class="image-contents">
-
+                        
                         
                     </div>
+                    <div class="d-flex justify-content-center">{{$dataDetailKategori->links()}}</div>
+                    
                 </div>
+               
             
 
             <!-- Single Blog Post -->

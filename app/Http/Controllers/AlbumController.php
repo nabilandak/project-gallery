@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Postingan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,15 @@ class AlbumController extends Controller
         ];
 
         Album::create($dataAlbum);
-        return redirect('/');
+        return redirect('/profile'.'/'.Auth::user()->id)->with('success', 'Album Berhasil DiUpload!');
 
     }
+
+    public function detailAlbum($id){
+        $dataDetailAlbum = Postingan::where('album_id',$id)->paginate(10);
+        $album = Album::FirstWhere('id', $id);
+        return view('layout.detail-album', compact('dataDetailAlbum','album'));
+    }
+
+
 }

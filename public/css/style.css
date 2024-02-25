@@ -53,3 +53,30 @@
   .mt-3 .link-hover:hover {
     color:#db4437; /* Change the text color on hover */
   }
+
+  /* Stylize input and textarea in modal */
+  .modal-content {
+    background-color: #222627; /* Warna latar belakang */
+    padding: 20px; /* Padding untuk meningkatkan ruang di sekitar form */
+    border-radius: 5px; /* Membuat sudut form menjadi melengkung */
+}
+
+.modal-content input[type="text"],
+.modal-content textarea {
+    background-color: #393c3d; /* Warna latar belakang */
+    color: #ffffff; /* Warna teks */
+    border-color: #ced4da; /* Warna border */
+}
+
+/* Adjust focus style */
+.modal-content input[type="text"]:focus,
+.modal-content textarea:focus {
+    color: #ffffff; /* Warna teks */
+    border-color: #ced4da; /* Warna border saat fokus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Efek shadow saat fokus */
+}
+
+.btn-custom{
+    background-color: #6c757d !important;
+    border: 1px solid #6c757d !important;
+}

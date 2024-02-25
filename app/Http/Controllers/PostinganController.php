@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Kategori;
+use App\Models\Komentar;
 use App\Models\Postingan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,9 @@ class PostinganController extends Controller
         $request->validate([
             'judul'=>'required',
             'deskripsi'=>'required',
-            'album_id'=>'required',
             'foto'=>'required | mimes:jpg,png,jpeg',
+            'kategori_id'=>'required',
+            'album_id'=>'required',
         ]);
 
         $foto_file = $request->file('foto');
@@ -38,7 +40,7 @@ class PostinganController extends Controller
         ];
 
         Postingan::create($dataPostingan);
-        return redirect('/');
+        return redirect('/profile'.'/'.Auth::user()->id)->with('success', 'Foto Berhasil DiUpload!');
 
     }
     public function form(Request $request){
@@ -47,8 +49,66 @@ class PostinganController extends Controller
         return view('layout.upload-foto', compact('dataKategori', 'dataAlbum'));
     }
 
-    public function detailFoto(Request $request){
-        $dataPostingan = Postingan::FirstWhere('user_id',Auth::user()->id);
-        return view('layout.detail-foto', compact('dataPostingan'));
+    public function detailFoto(Request $request, $id){
+        $dataPostingan = Postingan::findOrFail($id);
+        // Cari komentar yang terkait dengan postingan yang ditemukan sebelumnya
+        $relatedPostingan = Postingan::where('user_id', $dataPostingan->user_id)
+                             ->inRandomOrder()
+                             ->take(4)
+                             ->get();
+    
+        return view('layout.detail-foto', compact('dataPostingan', 'relatedPostingan'));
+    }
+    
+    
+
+    public function indexEdit($id){
+        $dataPostingan = Postingan::find($id);
+        $dataKategori = Kategori::all();
+        $dataAlbum = Album::where('user_id', auth()->user()->id)->get();
+        return view('layout.edit-foto', compact('dataPostingan','dataKategori','dataAlbum'));
+    }
+
+    public function update(Request $request, $id) {
+        // Validasi request
+        $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+            'kategori_id' => 'required',
+            'album_id' => 'required',
+        ]);
+    
+        // Ambil data postingan berdasarkan ID
+        $dataEditPostingan = Postingan::findOrFail($id);
+    
+        // Update data postingan
+        $dataEditPostingan->judul = $request->judul;
+        $dataEditPostingan->deskripsi = $request->deskripsi;
+        $dataEditPostingan->kategori_id = $request->kategori_id;
+        $dataEditPostingan->album_id = $request->album_id;
+        $dataEditPostingan->save();
+    
+        // Redirect dengan pesan sukses
+        return redirect('/detail-foto'.'/'.$id)->with('success', 'Postingan Berhasil DiEdit!');
+    }
+    public function delete($id) {
+        // Temukan postingan berdasarkan ID
+        $postingan = Postingan::findOrFail($id);
+        
+        // Hapus foto terlebih dahulu
+        $this->hapusFoto($postingan->foto);
+    
+        // Hapus postingan
+        $postingan->delete();
+        
+        // Redirect dengan pesan sukses
+        return redirect('/profile'.'/'.Auth::user()->id)->with('success', 'Postingan Berhasil Dihapus!');
+    }
+    
+    private function hapusFoto($foto_name) {
+        $foto_path = public_path('img-foto/') . $foto_name;
+        if (file_exists($foto_path)) {
+            unlink($foto_path);
+        }
     }
 }

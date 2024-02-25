@@ -19,7 +19,7 @@ class Postingan extends Model
     }
 
     public function komentar(){
-        return $this->hasMany(Komentar::class, 'komentar_id', 'id');
+        return $this->hasMany(Komentar::class, 'postingan_id', 'id');
     }
 
     public function favorite(){

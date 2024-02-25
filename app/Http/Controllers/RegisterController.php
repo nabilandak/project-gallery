@@ -41,7 +41,7 @@ class RegisterController extends Controller
         ];
 
         User::create($credentials);
-        return redirect('/login');
+        return redirect('/login')->with('success', 'Registrasi Berhasil!');
 
     }
 }

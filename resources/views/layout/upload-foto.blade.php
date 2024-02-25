@@ -237,7 +237,7 @@
                             <div class="form-group">
                                 <label for="category">Category</label>
                                 <select class ="form-control text-white" name="kategori_id">
-                                    <option>-- DEFAULT --</option>
+                                    <option value="">-- DEFAULT --</option>
                                     @foreach($dataKategori as $d)
                                     <option value="{{$d->id}}">{{$d->nama}}</option>
                                     @endforeach
@@ -250,7 +250,7 @@
                                 <label for="album">Album</label>
 
                                 <select class ="form-control text-white" name="album_id">
-                                    <option>-- DEFAULT --</option>
+                                    <option value="">-- DEFAULT --</option>
                                     @foreach($dataAlbum as $d)
                                     <option value="{{$d->id}}">{{$d->name}}</option>
                                     @endforeach

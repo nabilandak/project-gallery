@@ -1,5 +1,7 @@
 @extends('app/master')
 @section('contents')
+@include('layout.modal')
+
 
 <div class="vizew-breadcrumb">
     <div class="container">
@@ -9,7 +11,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="post-details-thumb mb-50">
-                    <img src='{{ asset('img-foto/'.$dataPostingan->foto)}}' alt=''>
+                    <img src="{{ asset('img-foto/'.$dataPostingan->foto) }}" alt=''>
                 </div>
 
             </div>
@@ -24,31 +26,65 @@
 
                                 <!-- Post Content -->
                                 <div class="post-content mt-0">
-                                    <a href="#" class="post-cata cata-sm cata-danger">{{$dataPostingan->kategori->nama}}</a>
-                                    <a href="single-post.html" class="post-title mb-2">{{$dataPostingan->judul}}</a>
+
+
+                                    <a href="#"
+                                        class="post-cata cata-sm cata-danger">{{ $dataPostingan->kategori->nama }}</a>
+                                    <i class="fa fa-exclamation-circle ml-5" aria-hidden="true" data-toggle="modal"
+                                        data-target="#exampleModal"></i>
+
+                                    <a href="single-post.html" class="post-title mb-2">{{ $dataPostingan->judul }}</a>
 
                                     <div class="d-flex justify-content-between mb-30">
                                         <div class="post-meta d-flex align-items-center">
-                                            <a href="#" class="post-author">By: {{Auth::user()->name}}</a>
+                                            <a href="/profile/{{ $dataPostingan->user->id }}"
+                                                class="post-author">By: {{ $dataPostingan->user->name }}</a>
                                             <i class="fa fa-circle" aria-hidden="true"></i>
-                                            <a href="#" class="post-date">{{ $dataPostingan->created_at->format('Y-m-d') }}</a>
+                                            <a href="#"
+                                                class="post-date">{{ $dataPostingan->created_at->format('Y-m-d') }}</a>
 
                                         </div>
+
 
                                     </div>
                                 </div>
 
-                                <p>{{$dataPostingan->deskripsi}}</p>
+                                <p>{{ $dataPostingan->deskripsi }}</p>
 
-                                <div class="post-meta d-flex mt-30 mb-30">
-                                    <ul>
-                                        <li class="d-inline"><a href="#"><i class="icon fa fa-thumbs-o-up"
-                                                    aria-hidden="true" style="font-size: 25px;"></i> 7</a></li>
-                                        <li class="d-inline mx-5"><a href="#"><i class="icon fa fa-comments-o"
-                                                    aria-hidden="true" style=" font-size: 25px;"></i> 32</a></li>
-
+                                <div class="post-meta d-flex align-items-center">
+                                    <ul class="d-flex">
+                                        <li class="d-block align-items-center mr-2">Like: <span id="likeCount"
+                                                class="ml-2">{{ $dataPostingan->like->count() }}</span></li>
+                                        <li class="d-block align-items-center mr-2">Komentar: <span id="likeCount"
+                                                class="ml-2">{{ $dataPostingan->komentar->count() }}</span></li>
                                     </ul>
                                 </div>
+
+                                <div class="post-meta row mt-30 mb-30">
+                                    <ul class="d-flex">
+                                        <li class="d-flex align-items-center ml-3 mr-3">
+
+                                            <div>
+                                                <button
+                                                    data-liked="{{ $dataPostingan->like->contains('user_id', auth()->id()) ? 'true' : 'false' }}"
+                                                    class="btn btn-primary bg-none" id="likeButton"
+                                                    data-post-id="{{ $dataPostingan->id }}">
+                                                    <i class="icon fa fa-thumbs-o-up mr-2" aria-hidden="true"
+                                                        style="font-size: 25px;" id="not-like"></i>
+                                                    <i class="icon fa fa-thumbs-up" style="font-size: 25px;"
+                                                        id="liked"></i>
+                                                </button>
+                                            </div>
+
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <button id="btnKomentar" class="btn btn-primary"
+                                                data-target="#isi_komentar"><i class="icon fa fa-comments-o mr-2"
+                                                    aria-hidden="true" style="font-size: 25px;"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+
 
                             </div>
 
@@ -56,64 +92,54 @@
 
                     </div>
                     <div class="col-sm-12 mt-3">
-                        <a href='/edit-foto' class="btn vizew-btn" style="background-color: orange;">Edit</a>
-                        <a href='' class="btn vizew-btn mx-3">Delete</a>
+                    @auth
+                        @if($dataPostingan->user->id == Auth::user()->id)
+                            <a href='/edit-foto/{{ $dataPostingan->id }}' class="btn vizew-btn" style="background-color: orange;">Edit</a>
+                            <a href='/delete-foto-proses/{{ $dataPostingan->id }}' class="btn vizew-btn mx-3">Delete</a>
+                        @endif
+                    @endauth
+
+
                     </div>
                 </div>
-                <!-- Related Post Area -->                
+                <!-- Related Post Area -->
             </div>
         </div>
         <div class="related-post-area mt-5">
-                    <!-- Section Title -->
-                    <div class="section-heading style-2">
-                        <h4>Related Post</h4>
-                        <div class="line"></div>
-                    </div>
+            <!-- Section Title -->
+            <div class="section-heading style-2">
+                <h4>Related Post</h4>
+                <div class="line"></div>
+            </div>
 
-                    <div class="row">
+            <div class="row">
 
-                        <!-- Single Blog Post -->
+                <!-- Single Blog Post -->
+                @foreach($relatedPostingan as $key => $r)
+                    @if($key < 4)
                         <div class="col-12 col-md-3">
                             <div class="single-post-area mb-30">
                                 <!-- Post Thumbnail -->
                                 <div class="post-thumbnail">
-                                    <a href=''><img src="img/bg-img/11.jpg" alt=""></a>
+                                    <a href='/detail-foto/{{ $r->id }}'><img
+                                            src="{{ asset('img-foto/'.$r->foto) }}" alt=""></a>
                                 </div>
+
                             </div>
                         </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="col-12 col-md-3">
-                            <div class="single-post-area mb-30">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <a href=''><img src="img/bg-img/12.jpg" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="single-post-area mb-30">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <a href=''><img src="img/bg-img/11.jpg" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="col-12 col-md-3">
-                            <div class="single-post-area mb-30">
-                                <!-- Post Thumbnail -->
-                                <div class="post-thumbnail">
-                                    <a href=''><img src="img/bg-img/12.jpg" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
+                    @else
+                        @break
+                    @endif
+                @endforeach
 
 
-                    </div>
-                </div>
+
+
+            </div>
+        </div>
         <div class="col-12">
+
+
             <div class="comment_area clearfix mb-50">
 
                 <!-- Section Title -->
@@ -122,59 +148,15 @@
                     <div class="line"></div>
                 </div>
 
-                <ul>
+                <ul id='komentar'>
                     <!-- Single Comment Area -->
-                    <li class="single_comment_area">
-                        <!-- Comment Content -->
-                        <div class="comment-content d-flex">
-                            <!-- Comment Author -->
-                            <div class="comment-author">
-                                <img src="img/bg-img/31.jpg" alt="author">
-                            </div>
-                            <!-- Comment Meta -->
-                            <div class="comment-meta">
-                                <a href="#" class="comment-date">27 Aug 2019</a>
-                                <h6>Tomas Mandy</h6>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                    consectetur, adipisci velit, sed quia non numquam eius</p>
-                                    
-                                    
-                                <div class="d-flex align-items-center">
-                                    
-                                </div>
-                            </div>
-                        </div>
 
-                        <ol class="children">
-                            <li class="single_comment_area">
-                                <!-- Comment Content -->
-
-                            </li>
-                        </ol>
-                    </li>
 
                     <!-- Single Comment Area -->
-                    <li class="single_comment_area">
-                        <!-- Comment Content -->
-                        <div class="comment-content d-flex">
-                            <!-- Comment Author -->
-                            <div class="comment-author">
-                                <img src="img/bg-img/33.jpg" alt="author">
-                            </div>
-                            <!-- Comment Meta -->
-                            <div class="comment-meta">
-                                <a href="#" class="comment-date">27 Aug 2019</a>
-                                <h6>Simon Downey</h6>
-                                <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                    consectetur, adipisci velit, sed quia non numquam eius</p>
-                                <div class="d-flex align-items-center">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+
                 </ul>
             </div>
+
             <div class="post-a-comment-area">
 
                 <!-- Section Title -->
@@ -185,17 +167,33 @@
 
                 <!-- Reply Form -->
                 <div class="contact-form-area">
-                    <form action="#" method="post">
+                    <form id="comment_form">
                         <div class="row">
-                            
-                            <div class="col-12">
-                                <textarea name="message" class="form-control" id="message"
-                                    placeholder="Message*"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn vizew-btn mt-30" type="submit">Submit
-                                    Comment</button>
-                            </div>
+                            @if(Auth::check())
+                                <div class="col-12">
+                                    <input type='hidden' id='postingan_id' name='postingan_id'
+                                        value="{{ $dataPostingan->id }}">
+                                    <textarea name="isi_komentar" class="form-control text-white" id="isi_komentar"
+                                        placeholder="Masukan komentar!"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn vizew-btn mt-30" type="submit">Submit
+                                        Comment</button>
+                                </div>
+                            @else
+                                <div class="col-12">
+                                    <input type='hidden' id='postingan_id' name='postingan_id'
+                                        value="{{ $dataPostingan->id }}">
+                                    <textarea name="isi_komentar" class="form-control text-white" id="isi_komentar"
+                                        placeholder="Harap login terlebih dahulu untuk mengisi komentar!"
+                                        disabled></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn vizew-btn mt-30" type="button" disabled>Submit
+                                        Comment</button>
+                                </div>
+                            @endif
+
                         </div>
                     </form>
                 </div>
@@ -209,4 +207,117 @@
 
 
 
+
+@endsection
+@section('script')
+
+<script>
+    function read() {
+        $.get("/comment-read/{{ $dataPostingan->id }}", {}, function (data) {
+            $('#komentar').html(data);
+        });
+    }
+    $(document).ready(function () {
+        read();
+
+        $('#komentar').on('click', '.laporKomen', function () {
+            $('#exampleModal2').show();
+            var komenId = $(this).data('komen-id');
+
+            $.ajax({
+                url: '/report-view/' + komenId,
+                type: 'get',
+                success: function (res) {
+                    console.log(res)
+                }
+            })
+        });
+
+
+
+
+
+
+        $('#btnKomentar').click(function () {
+            // Mendapatkan target elemen yang akan dituju
+            var target = $(this).data('target');
+
+            // Mendapatkan tinggi dan posisi tengah elemen target
+            var targetHeight = $(target).outerHeight();
+            var targetOffset = $(target).offset().top;
+            var windowHeight = $(window).height();
+            var scrollToPosition = targetOffset - (windowHeight / 2) + (targetHeight / 2);
+
+            // Melakukan scroll ke posisi tengah elemen target
+            $('html, body').animate({
+                scrollTop: scrollToPosition
+            }, 1000); // Waktu animasi dalam milidetik (1000ms = 1 detik)
+        });
+
+        const isLiked = $('#likeButton').data('liked');
+        if (isLiked === true) {
+            $('#not-like').hide()
+            $('#liked').show();
+        } else {
+            $('#not-like').show()
+            $('#liked').hide();
+        }
+        $('#likeButton').click(function () {
+            const postId = $(this).data('post-id');
+            const likeUrl = `/like-post/${postId}`;
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: likeUrl,
+                type: "post",
+                success: function (data) {
+                    if (data.liked) {
+                        $('#not-like').hide()
+                        $('#liked').show();
+                    } else {
+                        $('#not-like').show()
+                        $('#liked').hide();
+                    }
+                    $('#likeCount').text(data
+                    .countLike); // Menggunakan .text() untuk mengganti teks di dalam elemen #likeCount
+                },
+                error: function (jqXHR, ajaxOptions, thrownError) {
+                    console.log('server error');
+                }
+            });
+
+        });
+
+        $('#comment_form').submit(function (e) {
+            e.preventDefault();
+            const postId = document.getElementById("postingan_id").value;
+            const commentUrl = `/comment-post/${postId}`;
+            var formData = new FormData(this);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                contentType: false,
+                processData: false, // perbaikan pada penulisan
+            });
+
+            $.ajax({
+                url: commentUrl,
+                type: "post",
+                data: formData,
+                success: function (res) {
+                    read();
+                    $('#comment_form')[0].reset();
+                }
+            });
+        });
+    });
+
+</script>
 @endsection

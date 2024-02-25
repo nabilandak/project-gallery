@@ -11,18 +11,27 @@ class LoginController extends Controller
         return view('layout.login');
     }
     public function login(Request $request){
-       $dataLogin = $request->validate([
+        $dataLogin = $request->validate([
             'email'=>'required',
             'password'=>'required',
         ]);
+    
         if(Auth::attempt($dataLogin)){
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+            $user = Auth::user();
+            
+            // Memeriksa apakah pengguna adalah admin
+            if($user->role === 'admin'){
+                Auth::logout(); // Logout pengguna admin
+                return back()->with('error','Admin tidak diperbolehkan menggunakan login ini!');
+            } else {
+                $request->session()->regenerate();
+                return redirect()->intended('/')->with('success','Login Berhasil!');;
+            }
         }else{
-            return back()->with('error','username atau password anda salah! ');
+            return back()->with('error','Username atau password Anda salah!');
         }
-
     }
+    
     public function logout(Request $request){
         Auth::logout();
      
