@@ -95,7 +95,7 @@
                     @auth
                         @if($dataPostingan->user->id == Auth::user()->id)
                             <a href='/edit-foto/{{ $dataPostingan->id }}' class="btn vizew-btn" style="background-color: orange;">Edit</a>
-                            <a href='/delete-foto-proses/{{ $dataPostingan->id }}' class="btn vizew-btn mx-3">Delete</a>
+                            <a href='/delete-foto-proses/{{ $dataPostingan->id }}' class="btn vizew-btn mx-3"  onclick="return confirm('Apakah Anda yakin ingin menghapus Postingan ini?')">Delete</a>
                         @endif
                     @endauth
 

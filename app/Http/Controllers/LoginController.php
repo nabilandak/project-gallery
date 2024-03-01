@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trigerlogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,9 @@ class LoginController extends Controller
                 return back()->with('error','Admin tidak diperbolehkan menggunakan login ini!');
             } else {
                 $request->session()->regenerate();
+                Trigerlogin::create([
+                    'id_user'=>Auth::user()->id
+                ]);
                 return redirect()->intended('/')->with('success','Login Berhasil!');;
             }
         }else{
@@ -33,6 +37,13 @@ class LoginController extends Controller
     }
     
     public function logout(Request $request){
+          // Ambil user yang sedang login
+        $user = Auth::user();
+
+        // Hapus data Trigerlogin jika ada
+        if ($user) {
+            Trigerlogin::where('id_user', $user->id)->delete();
+        }
         Auth::logout();
      
         $request->session()->invalidate();

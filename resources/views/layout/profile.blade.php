@@ -74,8 +74,11 @@
                                     </div>
 
                                     <div class="authors--meta-data d-flex">
-                                    <p>Followers<span class="counter">{{ $dataProfileUser->followers()->count() }}</span></p>
-                                        <p>Following<span class="counter">{{ $dataProfileUser->following()->count() }}</span>
+                                        <p>Followers<span
+                                                class="counter">{{ $dataProfileUser->followers()->count() }}</span>
+                                        </p>
+                                        <p>Following<span
+                                                class="counter">{{ $dataProfileUser->following()->count() }}</span>
                                         </p>
                                     </div>
 
@@ -142,9 +145,9 @@
 
                                             <!-- Centered Button -->
                                             @if(Auth::user()->id == $dataProfileUser->id)
-                                            <div class="col-12 mb-3">
-                                                <a href='/create-album' class="btn btn-primary">Add Album</a>
-                                            </div>
+                                                <div class="col-12 mb-3">
+                                                    <a href='/create-album' class="btn btn-primary">Add Album</a>
+                                                </div>
                                             @endif
                                         </div>
 
@@ -164,12 +167,15 @@
                         <!-- Single Blog Post -->
 
                         <div class="single-post-area mb-50">
-                            <div class="section-heading style-2">
-                                <h4>My Artwork</h4>
-                                <div class="line"></div>
+                            <div class="section-heading style-2 d-flex ">
+                                <h4 class="mr-4">My Artwork</h4>
+                                @if(Auth::user()->id == $dataProfileUser->id)
+                                    <a href='/upload-foto' class="btn btn-primary">Add Photo</a>
+                                @endif
                             </div>
-                            <!-- Post Thumbnail -->
+                            <div class="line"></div>
 
+                            <!-- Post Thumbnail -->
                             <div class="container-image">
                                 @foreach($dataPostingan as $d)
                                     <a href='/detail-foto/{{ $d->id }}'>
@@ -178,8 +184,8 @@
                                     </a>
                                 @endforeach
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>

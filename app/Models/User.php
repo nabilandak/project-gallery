@@ -3,10 +3,11 @@
 namespace App\Models;
 
 
+use App\Models\Trigerlogin;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -77,5 +78,9 @@ class User extends Authenticatable
 
     public function like(){
         return $this->hasMany(Like::class, 'user_id', 'id');
+    }
+
+    public function trigerlogin(){
+        return $this->hasMany(Trigerlogin::class, 'id_user', 'id');
     }
 }

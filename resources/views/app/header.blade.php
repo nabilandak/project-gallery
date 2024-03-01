@@ -34,7 +34,7 @@
                                 <li><a href="#">Create</a>
                                     <ul class="dropdown">
                                         <li><a href="/upload-foto">- Upload Artwork</a></li>
-                                        <li><a href="create-album">- Create Album</a></li>
+                                        <li><a href="/create-album">- Create Album</a></li>
                                     </ul>
                                 </li>
 

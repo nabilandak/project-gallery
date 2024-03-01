@@ -31,13 +31,6 @@
                                   
                                   <li class=""><a href="/">Home</a></li>
                                   <li><a href="archive-list.html">About</a></li>
-                                 
-                                  <li><a href="#">Create</a>
-                                      <ul class="dropdown">
-                                          <li><a href="/upload-foto">- Upload Artwork</a></li>
-                                          <li><a href="create-album">- Create Album</a></li>
-                                      </ul>
-                                  </li>
                                   
                                   <li><a href="/login">Login</a></li>
                                 <li><a href="/register">Register</a></li>

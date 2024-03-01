@@ -96,9 +96,11 @@ Route::middleware('isUser')->group(function(){
     Route::post('/upload-foto-proses', [PostinganController::class, 'uploadFoto']);
 
     Route::get('/detail-album/{id}', [AlbumController::class, 'detailAlbum']);
-
     Route::get('/create-album', [AlbumController::class, 'index']);
     Route::post('/create-album-proses', [AlbumController::class, 'create']);
+    Route::get('/edit-album/{id}', [AlbumController::class, 'indexEdit']);
+    Route::post('/edit-album-proses/{id}', [AlbumController::class, 'editProses']);
+    Route::get('/delete-album/{id}', [AlbumController::class, 'delete']);
     
 });
 

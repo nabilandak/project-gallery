@@ -20,7 +20,7 @@ class PostinganController extends Controller
         $request->validate([
             'judul'=>'required',
             'deskripsi'=>'required',
-            'foto'=>'required | mimes:jpg,png,jpeg',
+            'foto' => 'required|mimes:jpg,png,jpeg|max:2048', // Maksimum 2MB (2048 kilobit)
             'kategori_id'=>'required',
             'album_id'=>'required',
         ]);
