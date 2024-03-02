@@ -20,7 +20,7 @@ class isAdmin
         if(Auth::check() && Auth::user()->role === 'admin'){
             return $next($request);
         }
-        return redirect('/admin-login'); // Ubah dari '/' ke '/admin-login'
+        return redirect('/admin-login')->with('error', 'Anda Harus Login Terlebih Dahulu!'); // Ubah dari '/' ke '/admin-login'
     }
     
 

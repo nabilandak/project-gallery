@@ -193,7 +193,11 @@
             <div class="col-12">
                 <!-- Section Heading -->
                 <div class="section-heading">
+                    @if(request('search'))
+                    <h4>Browse by : {{request('search')}} </h4>
+                    @else
                     <h4>Browse All </h4>
+                    @endif
                     <div class="line"></div>
 
                 </div>
@@ -204,12 +208,10 @@
                         <li class="d-inline p-2"><a href='/category-detail/{{$k->id}}'>{{$k->nama}}</a></li>
                         @endforeach
                     </ul>
-                    <form action="/search" method="post">
-                        @csrf
-                        <input type="hidden" name="search" value="{{ request('search') }}">
+                    <form action="">
                     <div class="input-group rounded mt-5 d-flex justify-content-center">
                         <input type="search" class="form-control rounded text-white" placeholder="Cari berdasarkan Judul Karya" aria-label="Search"
-                            aria-describedby="search-addon" name="search" />
+                            aria-describedby="search-addon" name="search" value="{{request('search')}}"/>
                         <button class="input-group-text border-0" id="search-addon" type="submit">
                             <i class="fa fa-search"></i>
                         </button>

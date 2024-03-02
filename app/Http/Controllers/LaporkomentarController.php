@@ -9,7 +9,7 @@ use App\Models\Laporankomentar;
 class LaporkomentarController extends Controller
 {
    public function index($id){
-      // $tampilKomentar = Komentar::where('postingan_id',2)->first();
+      
       $tampilKomentar = Komentar::with(['user','postingan'])->where('id',$id)->first();
      
     return view('layout.lapor-komentar', compact('tampilKomentar'));

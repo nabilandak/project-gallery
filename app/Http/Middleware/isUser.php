@@ -20,6 +20,6 @@ class isUser
         if(Auth::check() && Auth::user()->role === 'user'){
             return $next($request);
         }
-        return redirect('/');
+        return redirect('/login')->with('error', 'Anda Harus Login Terlebih Dahulu!');
     }
 }

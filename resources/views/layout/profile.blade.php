@@ -1,22 +1,6 @@
 @extends('app/master')
 @section('contents')
 
-<div class="vizew-breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#">Features</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Typography</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="vizew-typography-area mb-80">
     <div class="container">
@@ -33,15 +17,32 @@
                                         <img class="author-avatar"
                                             src="{{ asset('img-avatar/'.$dataProfileUser->avatar) }}"
                                             alt="">
-                                        <a href="#" class="author-name">{{ $dataProfileUser->name }}</a>
+                                        <div class="d-flex justify-content-center">
+                                            <div>
+                                            @if(Auth::user()->id !== $dataProfileUser->id && $dataProfileUser->status !== 'no_active')
+                                            <a href='/lapor-profile/{{ $dataProfileUser->id }}' class="mr-2">
+                                                <i class="fa fa-exclamation-circle laporKomen" aria-hidden="true"></i>
+                                            </a>
+                                            @endif
+                                            </div>
+                                            <div>
+                                            @if($dataProfileUser->status == 'no_active')
+                                        <p><a href="#" class="text-danger">Akun Di banned!</a></p>
+                                        @endif
+                                                <a href="#" class="author-name">{{ $dataProfileUser->username }}</a>
+                                            </div>
+                                        </div>
+
+
                                         <p><a href="#">{{ $dataProfileUser->bio }}</a></p>
+                                        
                                         <div class="col-12 mb-3">
                                             @if(Auth::user()->id == $dataProfileUser->id)
                                                 <a href='/edit-profile/{{ $dataProfileUser->id }}'
                                                     class="btn btn-primary">Edit Profil</a>
 
                                             @endif
-                                            @if(Auth::user()->id !== $dataProfileUser->id)
+                                            @if(Auth::user()->id !== $dataProfileUser->id && $dataProfileUser->status !== 'no_active')
                                                 @if($data_follow)
                                                     <form id="followForm">
                                                         @csrf
@@ -57,6 +58,7 @@
                                                             value="{{ $dataProfileUser->id }}">
                                                         <button class="btn btn-primary follow-button" type="button"
                                                             id="follow">Follow</button>
+
                                                     </form>
                                                 @endif
                                             @else
@@ -66,19 +68,26 @@
                                                         value="{{ $dataProfileUser->id }}">
                                                     <button class="btn btn-primary follow-button" type="button"
                                                         id="follow">Follow</button>
+
                                                 </form>
                                             @endif
+                                            <div>
+
+                                            </div>
 
 
                                         </div>
                                     </div>
 
                                     <div class="authors--meta-data d-flex">
-                                        <p>Followers<span
-                                                class="counter">{{ $dataProfileUser->followers()->count() }}</span>
+                                        <p><a href='/detail-followers/{{$dataProfileUser->id}}' class="text-white">
+                                            Followers<span
+                                                class="">{{ $dataProfileUser->followers()->count() }}</span>
+                                                </a>
                                         </p>
-                                        <p>Following<span
-                                                class="counter">{{ $dataProfileUser->following()->count() }}</span>
+                                        <p><a href='/detail-following/{{$dataProfileUser->id}}' class="text-white"> Following<span
+                                                class="">{{ $dataProfileUser->following()->count() }}</span>
+                                            </a>
                                         </p>
                                     </div>
 
@@ -87,13 +96,26 @@
                                 </div>
 
                             </div>
+                            
                             <div class="col-lg-8 single-widget card">
+                            @if($dataProfileUser->status == 'no_active')
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">Username</p>
+                                        <p class="mb-0">Status Akun</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-white mb-0">{{ $dataProfileUser->username }}</p>
+                                        <p class="text-danger mb-0">Akun Di Banned!</p>
+                                    </div>
+
+                                </div>
+                                @endif
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Name</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-white mb-0">{{ $dataProfileUser->name }}</p>
                                     </div>
                                 </div>
 
@@ -116,6 +138,9 @@
                                     </div>
 
                                 </div>
+                                <hr>
+                                
+
 
                                 <div class="row">
                                     <div class="related-post-area mt-5">

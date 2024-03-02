@@ -24,7 +24,12 @@ class LoginController extends Controller
             if($user->role === 'admin'){
                 Auth::logout(); // Logout pengguna admin
                 return back()->with('error','Admin tidak diperbolehkan menggunakan login ini!');
-            } else {
+            }elseif ($user->status == 'no_active') {
+                request()->session()->invalidate();
+                request()->session()->regenerateToken();
+                return back()->with('error', 'Akun anda sudah di banned!');
+            } 
+            else {
                 $request->session()->regenerate();
                 Trigerlogin::create([
                     'id_user'=>Auth::user()->id

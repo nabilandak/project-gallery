@@ -16,7 +16,9 @@
     <link href="{{ asset('admin-asset/assets/vendor/jqvmap/css/jqvmap.min.css') }}"
         rel="stylesheet">
     <link href="{{ asset('admin-asset/assets/css/style.css') }}" rel="stylesheet">
- 
+    
+    
+
 
 
 
@@ -102,17 +104,22 @@
                 <div class="quixnav-scroll">
                     <ul class="metismenu" id="menu">
                         <li class="nav-label first">Main Menu</li>
-                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i
-                                    class="icon icon-single-04"></i><span class="nav-text">Dashboard</span></a>
-                            <ul aria-expanded="false">
-                                <li><a href="/admin">Dashboard Postingan</a></li>
-                                <li><a href="/admin-dashboard-komentar">Dashboard Komentar</a></li>
-                                <li><a href="/admin-dashboard-kategori">Dashboard Kategori</a></li>
+                        
+                            <ul aria-expanded="" style="background-color: #222627;">
+                                <li><a href="/admin">Dashboard</a></li>
+                                <li><a href="/admin-dashboard-postingan">Laporan Postingan</a></li>
+                                <li><a href="/admin-dashboard-komentar">Laporan Komentar</a></li>
+                                <li><a href="/admin-dashboard-profile">Laporan Profile</a></li>
+                                <li><a href="/admin-dashboard-kategori">Total Kategori</a></li>
+                                <li><a href="/admin-dashboard-user">Total User</a></li>
+                                <li><a href="/admin-dashboard-user-banned">Total User Banned</a></li>
                             </ul>
-                        </li>
+                      
+                        
                         
                     </ul>
                 </div>
+                
 
 
             </div>

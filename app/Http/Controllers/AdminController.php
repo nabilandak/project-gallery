@@ -2,20 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Komentar;
 use App\Models\Postingan;
+use App\Models\Laporprofile;
 use Illuminate\Http\Request;
 use App\Models\Laporankomentar;
 use App\Models\Laporanpostingan;
 use Illuminate\Support\Facades\Auth;
 
+
 class AdminController extends Controller
 {
     public function index(){
-        $dataLaporanPostingan = Laporanpostingan::paginate(10);
+        $dataLaporanPostingan = Laporanpostingan::get();
+        $dataLaporanKomentar = LaporanKomentar::get();
+        $dataUser = User::get();
+        $dataUserBanned = User::where('status', 'no_active')->get();
+        $dataKategori = Kategori::get();
+        $dataLaporanProfile = Laporprofile::get();
+      
         
-        return view('admin.layout.index',compact('dataLaporanPostingan'));
+        return view('admin.layout.index',compact('dataLaporanPostingan', 'dataLaporanKomentar', 'dataUser', 'dataKategori', 'dataLaporanProfile', 'dataUserBanned'));
+    }
+
+    public function dashboardPostingan(){
+        $dataLaporanPostingan = Laporanpostingan::get();
+        
+        return view('admin.layout.dashboard-postingan',compact('dataLaporanPostingan'));
     }
 
     public function dashboardKomentar(){
@@ -184,6 +199,50 @@ class AdminController extends Controller
      
         return redirect('/admin-login');
     }
+
+    public function dashboardProfile(){
+        $dataLaporanProfile = Laporprofile::paginate(20);
+        
+        return view('admin.layout.dashboard-profile',compact('dataLaporanProfile'));
+    }
+
+    public function detailProfile($id){
+        $dataDetailLaporanProfile = User::FirstWhere('id', $id);
+        return view('admin.layout.detail-profile',compact('dataDetailLaporanProfile'));
+    }
+
+    public function updateProfile(Request $request, $id) {
+        $request->validate([
+            'status' => 'required',
+        ]);
+    
+        // Temukan data pengguna berdasarkan ID
+        $findUserData = User::findOrFail($id);
+    
+        // Update status pengguna
+        $findUserData->update([
+            'status' => $request->status
+        ]);
+    
+        // Hapus laporan profil yang terkait dengan pengguna yang diupdate
+        $laporanProfile = Laporprofile::where('id_user', $findUserData->id)->first();
+        if ($laporanProfile) {
+            $laporanProfile->delete();
+        }
+    
+        return redirect('/admin-dashboard-profile')->with('success', 'Data Berhasil Dirubah!');
+    }
+    public function dashboardUser(){
+        $dataUser = User::where('role', 'user')->get();
+        
+        return view('admin.layout.dashboard-user',compact('dataUser'));
+    }
+    public function dashboardUserBanned(){
+        $dataUser = User::where('status', 'no_active')->get();
+        
+        return view('admin.layout.dashboard-user-banned',compact('dataUser'));
+    }
+    
     
 
    

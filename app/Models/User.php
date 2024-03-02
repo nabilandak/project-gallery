@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Models\Trigerlogin;
+use App\Models\Laporprofile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -69,12 +70,22 @@ class User extends Authenticatable
     }
 
     public function laporankomentar(){
-        return $this->hasMany(Laporan_komentar::class, 'user_id', 'id');
+        return $this->hasMany(Laporankomentar::class, 'user_id', 'id');
     }
 
     public function laporanpostingan(){
-        return $this->hasMany(Laporan_postingan::class, 'user_id', 'id');
+        return $this->hasMany(Laporanpostingan::class, 'user_id', 'id');
     }
+
+    public function laporProfile()
+    {
+    return $this->hasMany(Laporprofile::class, 'id_pelapor', 'id');
+    }
+    public function profileDilapor(){
+        return $this->hasMany(Laporprofile::class, 'id_user', 'id');
+    }
+
+
 
     public function like(){
         return $this->hasMany(Like::class, 'user_id', 'id');

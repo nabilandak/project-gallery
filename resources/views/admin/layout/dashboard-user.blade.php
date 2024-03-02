@@ -13,52 +13,54 @@
     <div class="container-fluid">
         
 
-        <div class="row ">
+       
+        <div class="row">
 
 
 
             <div class="col-lg-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Laporan Komentar</h4>
+                        <h4 class="card-title">Total User</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table mb-4">
+                            <table class="table mb-0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Foto Pelapor</th>
-                                        <th>Nama</th>
-                                        <th>Isi Laporan</th>
+                                        <th>Foto</th>
+                                        <th>Name</th>
+                                        <th>Bio</th>
+                                        <th>Status Active</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($dataLaporanKomentar as $no => $data)
+                                @foreach($dataUser as $no => $data)
                                     <tr>
                                       <td>{{$no + 1}}</td>
                                         <td>
                                             <div class="round-img">
-                                                <a href=""><img width="35" src="{{asset('img-avatar/'.$data->user->avatar)}}" alt=""></a>
+                                                <a href=""><img width="35" src="{{asset('img-avatar/'.$data->avatar)}}" alt=""></a>
                                             </div>
                                         </td>
-                                        <td>{{$data->user->name}}</td>
-                                        <td><span>{{$data->alasan}}</span></td>
+                                        <td>{{$data->name}}</td>
+                                        <td><span>{{Str::limit($data->bio, 20)}}</span></td>
+                                        <td>{{$data->status}}</td>
                                        
                                         <td>
-                                            <a href="/admin-detail-komentar/{{$data->komentar_id}}" class="btn btn-primary">Detail</a>
-                                            <a href="/admin-delete-laporan-komentar/{{$data->id}}" class="btn btn-warning"  onclick="return confirm('Apakah Anda yakin ingin menghapus Laporan ini?')">Hapus Laporan</a>
+                                            <a href="/admin-detail-profile/{{$data->id}}" class="btn btn-primary">Detail</a>
+                                        
                                         </td>
                                        
                                         
                                     </tr>
                                     @endforeach
-                                   
-                                   
+                                    
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center">{{$dataLaporanKomentar->links()}}</div>
+                           
                         </div>
                     </div>
                 </div>
