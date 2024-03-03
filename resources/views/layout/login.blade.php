@@ -13,7 +13,7 @@
             <div class="col-6 col-md-6">
                     <div class="login-content">
                         <!-- Section Title -->
-                        <div><img src='img/images/anime.png' alt=''></div>
+                        <div><img src='img/images/illus3.png' alt=''></div>
                     </div>
                 </div>
                 <div class="col-6 col-md-6 " style= "display:flex; align-items:center;">
@@ -27,7 +27,7 @@
                         <form action="/login-proses" method="post" enctype="multipart/form-data" autocomplete = "off">
                             @csrf
                             <div class="form-group">
-                                <input type="email" class="form-control text-white" id="exampleInputEmail1" placeholder="Email" name="email">
+                                <input type="email" class="form-control text-white" id="exampleInputEmail1" placeholder="Email" name="email" value="{{ old('email') }}">
                                 @error('email')
                                 <small class="text-danger">{{$message}}</small>
                                 @enderror

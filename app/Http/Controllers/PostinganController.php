@@ -17,13 +17,29 @@ class PostinganController extends Controller
     }
 
     public function uploadFoto(Request $request){
+        $pesan = [
+          'judul.required'=>'Judul tidak boleh dikosongkan!',
+          'deskripsi.required'=>'Deskripsi tidak boleh dikosongkan!',
+          'foto.required'=>'Foto tidak boleh dikosongkan!',
+          'judul.required'=>'Judul tidak boleh dikosongkan!',
+          'kategori_id.required'=>'Kategori tidak boleh dikosongkan!',
+          'album_id.required'=>'Album tidak boleh dikosongkan!',
+
+          'foto.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
+          'foto.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+          'judul.max'=>'Batas maximum judul adalah 50 Karakter',
+          'deskripsi.max'=>'Batas maximum judul adalah 100 Karakter',
+
+            
+        ];
         $request->validate([
-            'judul'=>'required',
-            'deskripsi'=>'required',
-            'foto' => 'required|mimes:jpg,png,jpeg|max:2048', // Maksimum 2MB (2048 kilobit)
-            'kategori_id'=>'required',
-            'album_id'=>'required',
-        ]);
+            'judul' => 'required|max:50',
+            'deskripsi' => 'required|max:100',
+            'foto' => 'required|mimes:jpg,png,jpeg|max:2048',
+            'kategori_id' => 'required',
+            'album_id' => 'required',
+        ], $pesan);
+        
 
         $foto_file = $request->file('foto');
         $foto_extention = $foto_file->extension();
@@ -70,13 +86,27 @@ class PostinganController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $pesan = [
+            'judul.required'=>'Judul tidak boleh dikosongkan!',
+            'deskripsi.required'=>'Deskripsi tidak boleh dikosongkan!',
+            'foto.required'=>'Foto tidak boleh dikosongkan!',
+            'judul.required'=>'Judul tidak boleh dikosongkan!',
+            'kategori_id.required'=>'Kategori tidak boleh dikosongkan!',
+            'album_id.required'=>'Album tidak boleh dikosongkan!',
+  
+            'foto.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
+            'foto.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+            'judul.max'=>'Batas maximum judul adalah 20 Karakter',
+            'deskripsi.max'=>'Batas maximum judul adalah 100 Karakter',
+          ];
         // Validasi request
         $request->validate([
-            'judul' => 'required',
-            'deskripsi' => 'required',
+            'judul' => 'required|max:50',
+            'deskripsi' => 'required|max:100',
             'kategori_id' => 'required',
             'album_id' => 'required',
-        ]);
+        ],$pesan
+    );
     
         // Ambil data postingan berdasarkan ID
         $dataEditPostingan = Postingan::findOrFail($id);

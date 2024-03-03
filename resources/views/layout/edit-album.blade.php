@@ -20,22 +20,22 @@
                         <form action="/edit-album-proses/{{$dataAlbumEdit->id}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="name">name</label>
+                                <label for="name">Nama Album</label>
+                                <input type="text" class="form-control text-white" id="name" name="name" value="{{$dataAlbumEdit->name}}">
                                 @error('name')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
-                                <input type="text" class="form-control text-white" id="name" name="name" value="{{$dataAlbumEdit->name}}">
                             </div>
                 
                             <div class="form-group">
-                                <label for="Description">Description</label>
+                                <label for="Description">Deskripsi Album</label>
                                 <textarea name="deskripsi" class="form-control text-white" id="Description" cols="30" rows="10" >{{$dataAlbumEdit->deskripsi}}</textarea>
                                 @error('deskripsi')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror
                             </div>
                             <div class="form-group">
-                            <label for="foto">Thumbnail</label>
+                            <label for="foto">Thumbnail Album</label>
                             <input type="file" class="form-control text-white" id="foto" name="thumbnail">
                             <input type="hidden" class="form-control text-white" id="foto" name="thumbnail_lama" >
                             <p>{{$dataAlbumEdit->thumbnail}}</p>

@@ -30,7 +30,12 @@
         transform: scale(1.1);
         transition: transform 0.3s ease-in-out;
     }
-    
+    .form-img img {
+        height: 1000px !important; /* Tinggi gambar = tinggi form input - (padding atas dan bawah * 2) */
+        width: auto; /* Biarkan lebar gambar mengikuti proporsi aslinya */
+        margin-bottom: 15px; /* Jarak antara gambar dan input */
+    }
+
     </style>
 
 </head>

@@ -12,10 +12,16 @@ class LoginController extends Controller
         return view('layout.login');
     }
     public function login(Request $request){
+        $pesan = [
+            
+            'email.required'=>'Email tidak boleh dikosongkan!',
+            'password.required'=>'Password tidak boleh dikosongkan!',
+          ];
         $dataLogin = $request->validate([
             'email'=>'required',
             'password'=>'required',
-        ]);
+        ],$pesan
+    );
     
         if(Auth::attempt($dataLogin)){
             $user = Auth::user();
@@ -37,7 +43,7 @@ class LoginController extends Controller
                 return redirect()->intended('/')->with('success','Login Berhasil!');;
             }
         }else{
-            return back()->with('error','Username atau password Anda salah!');
+            return back()->with('error','Username atau password Anda salah!')->withInput();
         }
     }
     

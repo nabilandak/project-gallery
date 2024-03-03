@@ -26,14 +26,16 @@
 
                                 <!-- Post Content -->
                                 <div class="post-content mt-0">
-
-
-                                    <a href="#"
-                                        class="post-cata cata-sm cata-danger">{{ $dataPostingan->kategori->nama }}</a>
-                                    <i class="fa fa-exclamation-circle ml-5" aria-hidden="true" data-toggle="modal"
-                                        data-target="#exampleModal"></i>
-
+                                    @if(!empty($dataPostingan->kategori->nama))
+                                        <a href="/category-detail/{{$dataPostingan->kategori->id}}"
+                                            class="post-cata cata-sm cata-danger">{{ $dataPostingan->kategori->nama }}</a>
+                                    @endif
+                                    <div class="d-flex">
                                     <a href="single-post.html" class="post-title mb-2">{{ $dataPostingan->judul }}</a>
+                                    <i class="fa fa-exclamation-circle ml-5 mt-2" aria-hidden="true" data-toggle="modal"
+                                        data-target="#exampleModal"></i>
+                                    </div>
+                                    
 
                                     <div class="d-flex justify-content-between mb-30">
                                         <div class="post-meta d-flex align-items-center">
@@ -92,12 +94,14 @@
 
                     </div>
                     <div class="col-sm-12 mt-3">
-                    @auth
-                        @if($dataPostingan->user->id == Auth::user()->id)
-                            <a href='/edit-foto/{{ $dataPostingan->id }}' class="btn vizew-btn" style="background-color: orange;">Edit</a>
-                            <a href='/delete-foto-proses/{{ $dataPostingan->id }}' class="btn vizew-btn mx-3"  onclick="return confirm('Apakah Anda yakin ingin menghapus Postingan ini?')">Delete</a>
-                        @endif
-                    @endauth
+                        @auth
+                            @if($dataPostingan->user->id == Auth::user()->id)
+                                <a href='/edit-foto/{{ $dataPostingan->id }}' class="btn vizew-btn"
+                                    style="background-color: orange;">Edit</a>
+                                <a href='/delete-foto-proses/{{ $dataPostingan->id }}' class="btn vizew-btn mx-3"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus Postingan ini?')">Delete</a>
+                            @endif
+                        @endauth
 
 
                     </div>
@@ -284,7 +288,8 @@
                         $('#liked').hide();
                     }
                     $('#likeCount').text(data
-                    .countLike); // Menggunakan .text() untuk mengganti teks di dalam elemen #likeCount
+                        .countLike
+                        ); // Menggunakan .text() untuk mengganti teks di dalam elemen #likeCount
                 },
                 error: function (jqXHR, ajaxOptions, thrownError) {
                     console.log('server error');

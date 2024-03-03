@@ -52,7 +52,7 @@
                 <div class="card">
                     <div class="stat-widget-two card-body">
                         <div class="stat-content">
-                            <a href=''>
+                            <a href='/admin-dashboard-user'>
                                 <div class="stat-text">Total User</div>
                             </a>
                             <div class="stat-digit">{{ $dataUser->count() }}</div>

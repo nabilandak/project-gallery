@@ -12,7 +12,8 @@
                     <div class="container py-5">
                         <div class="row">
                             <div class="col-lg-4 mb-5">
-                                <div class="card author-widget">
+                                
+                                <div class="author-widget mr-4">
                                     <div class="p-4">
                                         <img class="author-avatar"
                                             src="{{ asset('img-avatar/'.$dataProfileUser->avatar) }}"
@@ -97,8 +98,8 @@
 
                             </div>
                             
-                            <div class="col-lg-8 single-widget card">
-                            @if($dataProfileUser->status == 'no_active')
+                            <div class="col-lg-8 ">
+                                @if($dataProfileUser->status == 'no_active')
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <p class="mb-0">Status Akun</p>
@@ -118,16 +119,6 @@
                                         <p class="text-white mb-0">{{ $dataProfileUser->name }}</p>
                                     </div>
                                 </div>
-
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Phone</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-white mb-0">{{ $dataProfileUser->no_telepon }}</p>
-                                    </div>
-                                </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
@@ -136,7 +127,15 @@
                                     <div class="col-sm-9">
                                         <p class="text-white mb-0">{{ $dataProfileUser->address }}</p>
                                     </div>
-
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="mb-0">Jenis Kelamin</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <p class="text-white mb-0">{{ $dataProfileUser->jenis_kelamin }}</p>
+                                    </div>
                                 </div>
                                 <hr>
                                 
@@ -170,9 +169,7 @@
 
                                             <!-- Centered Button -->
                                             @if(Auth::user()->id == $dataProfileUser->id)
-                                                <div class="col-12 mb-3">
-                                                    <a href='/create-album' class="btn btn-primary">Add Album</a>
-                                                </div>
+                                                
                                             @endif
                                         </div>
 
@@ -192,13 +189,11 @@
                         <!-- Single Blog Post -->
 
                         <div class="single-post-area mb-50">
-                            <div class="section-heading style-2 d-flex ">
-                                <h4 class="mr-4">My Artwork</h4>
-                                @if(Auth::user()->id == $dataProfileUser->id)
-                                    <a href='/upload-foto' class="btn btn-primary">Add Photo</a>
-                                @endif
-                            </div>
+                        <div class="section-heading style-2">
+                            <h4>My Artwork</h4>
                             <div class="line"></div>
+                        </div>
+                            
 
                             <!-- Post Thumbnail -->
                             <div class="container-image">

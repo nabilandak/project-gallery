@@ -18,11 +18,23 @@ class AlbumController extends Controller
         return view('layout.edit-album',compact('dataAlbumEdit'));
     }
     public function create(Request $request){
+        $pesan = [
+            'name.required'=>'Nama Album tidak boleh dikosongkan!',
+            'deskripsi.required'=>'Deskripsi Album tidak boleh dikosongkan!',
+            'thumbnail.required'=>'Thumbnail Album tidak boleh dikosongkan!',
+
+            'name.max'=>'Batas maximum nama album adalah 50 Karakter',
+            'deskripsi.max'=>'Batas maximum deskripsi album adalah 150 Karakter',
+            'thumbnail.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
+
+            'thumbnail.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+          ];
         $request->validate([
-            'name'=>'required',
-            'deskripsi'=>'required',
+            'name'=>'required|max:50',
+            'deskripsi'=>'required|max:150',
             'thumbnail'=>'required | mimes:jpg,png,jpeg | max:2048 ',
-        ]);
+        ],$pesan
+    );
 
         $thumbnail_file = $request->file('thumbnail');
         $thumbnail_extention = $thumbnail_file->extension();
@@ -42,12 +54,19 @@ class AlbumController extends Controller
     }
 
     public function editProses(Request $request, $id) {
+        $pesan = [
+            'name.required'=>'Nama Album tidak boleh dikosongkan!',
+            'deskripsi.required'=>'Deskripsi Album tidak boleh dikosongkan!',
+
+            'name.max'=>'Batas maximum nama album adalah 50 Karakter',
+            'deskripsi.max'=>'Batas maximum deskripsi album adalah 150 Karakter',
+            
+          ];
         $request->validate([
-            'name' => 'required',
-            'deskripsi' => 'required',
-           
-           
-        ]);
+            'name'=>'required|max:50',
+            'deskripsi'=>'required|max:150',
+        ],$pesan
+    );
     
         $findDataAlbum = Album::findOrFail($id);
         $dataAlbumUpdate = [
@@ -57,9 +76,14 @@ class AlbumController extends Controller
 
     
         if ($request->hasFile('thumbnail')) {
+            $pesan = [
+                'thumbnail.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
+                'thumbnail.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+            ];
             $request->validate([
                 'thumbnail' => 'nullable|mimes:jpg,png,jpeg | max:2048',
-            ]);
+            ],$pesan
+        );
             $thumbnail_file = $request->file('thumbnail');
             $thumbnail_extention = $thumbnail_file->extension();
             $thumbnail_name = date('dmyhis').'.'.$thumbnail_extention;

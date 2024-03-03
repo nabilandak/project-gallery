@@ -10,7 +10,7 @@
                 <nav class="classy-navbar justify-content-between" id="vizewNav">
 
                     <!-- Nav brand -->
-                    <a href="index.html" class="nav-brand"><img src="{{asset('img/core-img/logo-2.png')}}" alt=""></a>
+                    <a href="/" class="nav-brand"><img src="{{asset('img/core-img/logo-2.png')}}" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -29,7 +29,7 @@
                             <ul>
 
                                 <li class=""><a href="/">Home</a></li>
-                                <li><a href="archive-list.html">About</a></li>
+                                <li><a href="/about">About</a></li>
 
                                 <li><a href="#">Create</a>
                                     <ul class="dropdown">

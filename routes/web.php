@@ -28,7 +28,12 @@ use App\Http\Controllers\LaporkomentarController;
 */
 
     Route::get('/', [ExploreController::class, 'index']);
-    
+    Route::get('/category-detail/{id}', [KategoriController::class, 'index']);
+    Route::get('/about',function(){
+        return view('layout.about');
+    });
+
+
 
 
     Route::get('/admin-login', [AdminController::class, 'indexLogin']);
@@ -62,11 +67,6 @@ Route::middleware('isAdmin')->group(function(){
     Route::get('/admin-dashboard-user-banned', [AdminController::class, 'dashboardUserBanned']);
         
 });
-
-
-Route::get('/category-detail/{id}', [KategoriController::class, 'index']);
-
-
 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login');

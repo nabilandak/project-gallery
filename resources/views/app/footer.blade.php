@@ -21,7 +21,7 @@
                     <div class="contact-address">
                         <p>Indonesia - West Java</p>
                         <p>Phone: 001-1234-88888</p>
-                        <p>Email: spaceart@gmail.com</p>
+                        <a href="mailto:nocankus256@gmail.com" class="btn btn-primary w-100 mt-4">Email</a>
                     </div>
     
                    

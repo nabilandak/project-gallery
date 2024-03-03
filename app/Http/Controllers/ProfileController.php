@@ -28,16 +28,31 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $pesan = [
+            'name.required'=>'Nama tidak boleh dikosongkan!',
+            'email.required'=>'Email tidak boleh dikosongkan!',
+            'username.required'=>'Username tidak boleh dikosongkan!',
+            'jenis_kelamin.required'=>'Jenis Kelamin tidak boleh dikosongkan!',
+
+            'email.unique'=>'Email sudah digunakan!',
+            'username.unique'=>'Username sudah digunakan!',
+            'no_telepon.unique'=>'No Telfon sudah digunakan!',
+
+            'email.max'=>'Batas maximum email adalah 150 Karakter',
+            'username.max'=>'Batas maximum username adalah 50 Karakter',
+            'name.max'=>'Batas maximum nama adalah 150 Karakter',
+          ];
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,'.$id,
-            'username' => 'required|unique:users,username,'.$id,
-            'no_telepon' => 'required|unique:users,no_telepon,'.$id,
+            'name' => 'required|max:150', 
+            'email' => 'required|unique:users,email,'.$id.'|max:150',
+            'username' => 'required|unique:users,username,'.$id.'|max:50',
+            'no_telepon' => 'nullable|unique:users,no_telepon,'.$id, 
             'jenis_kelamin' => 'required',
-            'bio' => 'required',
-            'address' => 'required',
-           
-        ]);
+            'bio' => 'nullable',
+            'address' => 'nullable',
+            
+        ],$pesan
+    );
     
         $findUserData = User::findOrFail($id);
         $dataProfileUpdate = [
@@ -52,9 +67,13 @@ class ProfileController extends Controller
 
     
         if ($request->hasFile('avatar')) {
+            $pesan = [
+                'avatar.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
+                'avatar.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+              ];
             $request->validate([
-                'avatar' => 'nullable|mimes:jpg,png,jpeg',
-            ]);
+                'avatar' => 'nullable|mimes:jpg,png,jpeg|max:2048',
+            ], $pesan);
             $avatar_file = $request->file('avatar');
             $avatar_extention = $avatar_file->extension();
             $avatar_name = date('dmyhis').'.'.$avatar_extention;
