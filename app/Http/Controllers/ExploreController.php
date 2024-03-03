@@ -15,7 +15,7 @@ class ExploreController extends Controller
             $dataFoto = Postingan::latest();
         }
         $kategori = Kategori::latest()->get();
-        $foto = $dataFoto->paginate(10);
+        $foto = $dataFoto->paginate(25);
         return view('index',compact('foto', 'kategori'));
     }
     

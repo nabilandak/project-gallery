@@ -28,12 +28,12 @@
                                     <tr>
                                         <td>
                                             <div class="round-img">
-                                                <a href="">
+                                                <a href="/profile/{{ $data->follower->id }}">
                                                     <img width="35" src="{{ asset('img-avatar/'.$data->follower->avatar) }}" alt="" class="rounded-circle">
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $data->follower->username }}</td>
+                                        <td> <a href="/profile/{{ $data->follower->id }}">{{ $data->follower->username }}</a></td></td>
                                         <td>
                                             <div class="col-12 mb-3">
                                             
