@@ -17,6 +17,7 @@ class RegisterController extends Controller
             'username.required'=>'Username tidak boleh dikosongkan!',
             'jenis_kelamin.required'=>'Jenis Kelamin tidak boleh dikosongkan!',
             'password.required'=>'Password tidak boleh dikosongkan!',
+            'password.min'=>"Minimal password adalah 8 Karakter",
 
             'email.unique'=>'Email sudah digunakan!',
             'username.unique'=>'Username sudah digunakan!',
@@ -30,11 +31,12 @@ class RegisterController extends Controller
             'name' => 'required|max:150', 
             'email' => 'required|unique:users,email|max:150',
             'username' => 'required|unique:users,username|max:50',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'no_telepon' => 'nullable|unique:users,no_telepon,', 
             'jenis_kelamin' => 'required',
             'bio' => 'nullable|max:50',
             'address' => 'nullable|max:250',
+            
             
         ],$pesan
     );

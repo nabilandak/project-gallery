@@ -54,9 +54,10 @@
                             <select class="form-control text-white"  name="album_id">
                                 <option value="">-- DEFAULT --</option>
                                 @foreach($dataAlbum as $d)
-                                    <option value="{{$d->id}}" @if($d->id == $dataPostingan->album->id) selected @endif>{{$d->name}}</option>
-                                 @endforeach
+                                    <option value="{{$d->id}}" @if($dataPostingan->album && $d->id == $dataPostingan->album->id) selected @endif>{{$d->name}}</option>
+                                @endforeach
                             </select>
+
                             @error('album_id')
                                 <small class="text-danger">{{$message}}</small>
                             @enderror

@@ -23,7 +23,6 @@ class PostinganController extends Controller
           'foto.required'=>'Foto tidak boleh dikosongkan!',
           'judul.required'=>'Judul tidak boleh dikosongkan!',
           'kategori_id.required'=>'Kategori tidak boleh dikosongkan!',
-          'album_id.required'=>'Album tidak boleh dikosongkan!',
 
           'foto.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
           'foto.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
@@ -37,7 +36,7 @@ class PostinganController extends Controller
             'deskripsi' => 'required|max:100',
             'foto' => 'required|mimes:jpg,png,jpeg|max:2048',
             'kategori_id' => 'required',
-            'album_id' => 'required',
+        
         ], $pesan);
         
 
@@ -89,13 +88,9 @@ class PostinganController extends Controller
         $pesan = [
             'judul.required'=>'Judul tidak boleh dikosongkan!',
             'deskripsi.required'=>'Deskripsi tidak boleh dikosongkan!',
-            'foto.required'=>'Foto tidak boleh dikosongkan!',
             'judul.required'=>'Judul tidak boleh dikosongkan!',
             'kategori_id.required'=>'Kategori tidak boleh dikosongkan!',
-            'album_id.required'=>'Album tidak boleh dikosongkan!',
-  
-            'foto.mimes'=>'File foto yang dapat diunggah hanya: jpg, png, dan jpeg!',
-            'foto.max'=>'Ukuran foto tidak boleh lebih dari 2 mb!',
+
             'judul.max'=>'Batas maximum judul adalah 20 Karakter',
             'deskripsi.max'=>'Batas maximum judul adalah 100 Karakter',
           ];
@@ -104,7 +99,6 @@ class PostinganController extends Controller
             'judul' => 'required|max:50',
             'deskripsi' => 'required|max:100',
             'kategori_id' => 'required',
-            'album_id' => 'required',
         ],$pesan
     );
     

@@ -72,7 +72,7 @@
                             @enderror
                             </div>
                             <div class="form-group">
-                                <label for="album">Album</label>
+                                <label for="album">Album (Optional)</label>
 
                                 <select class ="form-control text-white" name="album_id">
                                     <option value="">-- DEFAULT --</option>
